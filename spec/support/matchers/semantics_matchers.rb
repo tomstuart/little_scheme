@@ -18,7 +18,7 @@ module SemanticsMatchers
     end
 
     def evaluate(string)
-      evaluation_environment = Hash[environment.map { |name, string| [name, parse_s_expression(string)] }]
+      evaluation_environment = definitions.merge(Hash[environment.map { |name, string| [name, parse_s_expression(string)] }])
 
       evaluate_program(parse_program(string), evaluation_environment)
     end
@@ -127,6 +127,14 @@ module SemanticsMatchers
 
     match do |expected|
       evaluate(actual) == evaluate(expected)
+    end
+  end
+
+  matcher :be_a_member_of do |lat|
+    include EvaluatingMatcher
+
+    match do |atom|
+      evaluate(lat).s_expressions.include?(evaluate(atom))
     end
   end
 end
