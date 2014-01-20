@@ -1,0 +1,13 @@
+grammar Scheme
+  rule sexp
+     atom / listy
+  end
+
+  rule listy
+    "(" (sexp ' '?)+ ")"
+  end
+
+  rule atom
+    [a-z]+
+  end
+end
