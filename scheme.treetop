@@ -1,10 +1,10 @@
 grammar Scheme
   rule sexp
-     atom / listy
+    atom / list
   end
 
-  rule listy
-    "(" (sexp ' '?)+ ")"
+  rule list
+    '(' (sexp ' '?)* ')'
   end
 
   rule atom
