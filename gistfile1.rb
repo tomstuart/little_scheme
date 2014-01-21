@@ -1,4 +1,3 @@
-require 'minitest/unit'
 require 'minitest/autorun'
 
 class Atom
@@ -68,7 +67,7 @@ class Evaluator
   end
 end
 
-class EvaluatorTest < MiniTest::Unit::TestCase
+class EvaluatorTest < Minitest::Test
   def test_car
     assert_equal Atom.new(:a), evaluate(
       List.new(
