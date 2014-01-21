@@ -73,13 +73,13 @@ class EvaluatorTest < Minitest::Test
       List.new(
         Atom.new(:car),
         List.new(Atom.new(:a), Atom.new(:b), Atom.new(:c))
-        )
       )
+    )
 
     assert_equal Atom.new(:a), evaluate(
       List.new(Atom.new(:car), Atom.new(:l)),
-      l: List.new(Atom.new(:a), Atom.new(:b), Atom.new(:c)
-    ))
+      l: List.new(Atom.new(:a), Atom.new(:b), Atom.new(:c))
+    )
 
     # assert_equal :a, evaluate(%i(car l), l: %i(a b c))
     # assert_equal :d, evaluate(%i(car l), l: %i(d e f))
