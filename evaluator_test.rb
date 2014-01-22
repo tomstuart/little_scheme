@@ -1,68 +1,8 @@
 require 'minitest/autorun'
 
-class Atom
-  attr_reader :symbol
-
-  def initialize(symbol)
-    @symbol = symbol
-  end
-
-  def ==(other)
-    self.symbol == other.symbol
-  end
-end
-
-
-class List
-  def initialize(*array)
-    @array = array
-  end
-
-  def car
-    @array.first
-  end
-
-  def cdr
-    self.class.new(*@array[1..-1])
-  end
-
-  def ==(other)
-    self.array == other.array
-  end
-
-  protected
-
-  attr_reader :array
-end
-
-class Evaluator
-  def initialize(program)
-    @program = program
-  end
-
-  def evaluate(env={})
-    function, argument = @program.car, @program.cdr.car
-
-    case function.symbol
-    when :car
-      case argument
-      when Atom
-        env[argument.symbol].car
-      when List
-        argument.car
-      end
-    when :cdr
-      case argument
-      when Atom
-        env[argument.symbol].cdr
-      when List
-        argument.cdr
-      end
-    else
-      raise
-    end
-  end
-end
+require_relative 'atom'
+require_relative 'list'
+require_relative 'evaluator'
 
 class EvaluatorTest < Minitest::Test
   def test_car
