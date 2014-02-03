@@ -12,6 +12,13 @@ class EvaluatorTest < Minitest::Test
     )
   end
 
+  def test_car_car
+    assert_equal Atom.new(:hotdogs), evaluate(
+      List.new(Atom.new(:car), List.new(Atom.new(:car), Atom.new(:l))),
+      l: List.new(List.new(Atom.new(:hotdogs), Atom.new(:and)))
+    )
+  end
+
   def test_cdr
     assert_equal List.new(Atom.new(:b), Atom.new(:c)), evaluate(
       List.new(Atom.new(:cdr), Atom.new(:l)),

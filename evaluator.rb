@@ -10,6 +10,8 @@ class Evaluator
     case argument
     when Atom
       env[argument.symbol].send(operation)
+    when List
+      self.class.new(argument).evaluate(env).send(operation)
     else
       raise
     end
