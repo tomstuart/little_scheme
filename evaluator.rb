@@ -6,21 +6,10 @@ class Evaluator
   def evaluate(env={})
     function, argument = @program.car, @program.cdr.car
 
-    case function.symbol
-    when :car
-      case argument
-      when Atom
-        env[argument.symbol].car
-      else
-        raise
-      end
-    when :cdr
-      case argument
-      when Atom
-        env[argument.symbol].cdr
-      else
-        raise
-      end
+    operation = function.symbol
+    case argument
+    when Atom
+      env[argument.symbol].send(operation)
     else
       raise
     end
