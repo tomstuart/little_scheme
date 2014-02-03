@@ -11,15 +11,15 @@ class Evaluator
       case argument
       when Atom
         env[argument.symbol].car
-      when List
-        argument.car
+      else
+        raise
       end
     when :cdr
       case argument
       when Atom
         env[argument.symbol].cdr
-      when List
-        argument.cdr
+      else
+        raise
       end
     else
       raise
