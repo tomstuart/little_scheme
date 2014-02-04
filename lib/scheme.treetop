@@ -1,0 +1,22 @@
+grammar Scheme
+  rule sexp
+    atom / list
+  end
+
+  rule list
+    '(' sexps:(sexp ' '?)* ')' {
+      def to_ast
+        list_contents = sexps.elements.map{|element| element.sexp.to_ast }
+        List.new(*list_contents)
+      end
+    }
+  end
+
+  rule atom
+    [0-9a-z]+ {
+      def to_ast
+        Atom.new(text_value)
+      end
+    }
+  end
+end
