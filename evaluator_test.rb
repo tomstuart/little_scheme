@@ -1,8 +1,8 @@
 require 'minitest/autorun'
 
-require_relative 'atom'
-require_relative 'list'
-require_relative 'evaluator'
+require_relative 'lib/atom'
+require_relative 'lib/list'
+require_relative 'lib/evaluator'
 
 class EvaluatorTest < Minitest::Test
   def test_car

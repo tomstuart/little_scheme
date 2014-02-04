@@ -5,7 +5,7 @@ require 'evaluator'
 
 
 
-Treetop.load('scheme.treetop')
+Treetop.load('lib/scheme.treetop')
 
 parser = SchemeParser.new
 
