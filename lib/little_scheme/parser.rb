@@ -1,7 +1,5 @@
+require 'little_scheme/adapters/parser_adapter'
+
 module LittleScheme
-  class Parser
-    def parse(string)
-      # TODO Implement a parser here
-    end
-  end
+  Parser = Adapters::ParserAdapter
 end
