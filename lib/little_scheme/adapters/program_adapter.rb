@@ -6,6 +6,10 @@ module LittleScheme
       def initialize(s_expressions)
         super s_expressions.map(&SExpressionAdapter.method(:new))
       end
+
+      def evaluate(environment)
+        s_expressions.first.evaluate(environment)
+      end
     end
   end
 end

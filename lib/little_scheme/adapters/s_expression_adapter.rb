@@ -1,5 +1,6 @@
 require 'atom'
 require 'delegate'
+require 'evaluator'
 require 'list'
 
 module LittleScheme
@@ -23,6 +24,11 @@ module LittleScheme
 
       def s_expressions
         __getobj__.send(:array).map(&self.class.method(:new))
+      end
+
+      def evaluate(environment)
+        result = Evaluator.new(__getobj__).evaluate(environment)
+        self.class.new(result)
       end
     end
   end
