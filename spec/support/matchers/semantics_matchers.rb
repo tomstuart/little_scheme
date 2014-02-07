@@ -108,11 +108,11 @@ module SemanticsMatchers
     end
   end
 
-  def be_true
+  def evaluate_to_true
     evaluate_to '#t'
   end
 
-  def be_false
+  def evaluate_to_false
     evaluate_to '#f'
   end
 

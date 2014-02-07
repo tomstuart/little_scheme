@@ -77,40 +77,40 @@ describe 'a little Scheme' do
 
     specify { expect('l').to be_the_null_list.where l: '()' }
 
-    specify { expect('(null? (quote ()))').to be_true }
-    specify { expect('(null? l)').to be_false.where l: '(a b c)' }
+    specify { expect('(null? (quote ()))').to evaluate_to_true }
+    specify { expect('(null? l)').to evaluate_to_false.where l: '(a b c)' }
     specify { expect('(null? a)').to evaluate_to_nothing.where a: 'spaghetti' }
 
     specify { expect('Harry').to be_an_atom }
 
     describe '(atom? s)' do
-      it { is_expected.to be_true.where s: 'Harry' }
-      it { is_expected.to be_false.where s: '(Harry had a heap of apples)' }
+      it { is_expected.to evaluate_to_true.where s: 'Harry' }
+      it { is_expected.to evaluate_to_false.where s: '(Harry had a heap of apples)' }
     end
 
-    specify { expect('(atom? (car l))').to be_true.where l: '(Harry had a heap of apples)' }
+    specify { expect('(atom? (car l))').to evaluate_to_true.where l: '(Harry had a heap of apples)' }
 
     describe '(atom? (cdr l))' do
-      it { is_expected.to be_false.where l: '(Harry had a heap of apples)' }
-      it { is_expected.to be_false.where l: '(Harry)' }
+      it { is_expected.to evaluate_to_false.where l: '(Harry had a heap of apples)' }
+      it { is_expected.to evaluate_to_false.where l: '(Harry)' }
     end
 
     describe '(atom? (car (cdr l)))' do
-      it { is_expected.to be_true.where l: '(swing low sweet cherry oat)' }
-      it { is_expected.to be_false.where l: '(swing (low sweet) cherry oat)' }
+      it { is_expected.to evaluate_to_true.where l: '(swing low sweet cherry oat)' }
+      it { is_expected.to evaluate_to_false.where l: '(swing (low sweet) cherry oat)' }
     end
 
     specify { expect('a1').to be_the_same_atom_as('a2').where a1: 'Harry', a2: 'Harry' }
 
     describe '(eq? a1 a2)' do
-      it { is_expected.to be_true.where a1: 'Harry', a2: 'Harry' }
-      it { is_expected.to be_false.where a1: 'margarine', a2: 'butter' }
+      it { is_expected.to evaluate_to_true.where a1: 'Harry', a2: 'Harry' }
+      it { is_expected.to evaluate_to_false.where a1: 'margarine', a2: 'butter' }
     end
 
     specify { expect('(eq? l1 l2)').to evaluate_to_nothing.where l1: '()', l2: '(strawberry)' }
     specify { expect('(eq? n1 n2)').to evaluate_to_nothing.where n1: '6', n2: '7' }
-    specify { expect('(eq? (car l) a)').to be_true.where l: '(Mary had a little lamb)', a: 'Mary' }
+    specify { expect('(eq? (car l) a)').to evaluate_to_true.where l: '(Mary had a little lamb)', a: 'Mary' }
     specify { expect('(eq? (cdr l) a)').to evaluate_to_nothing.where l: '(soured milk)', a: 'milk' }
-    specify { expect('(eq? (car l) (car (cdr l)))').to be_true.where l: '(beans beans we need jelly beans)' }
+    specify { expect('(eq? (car l) (car (cdr l)))').to evaluate_to_true.where l: '(beans beans we need jelly beans)' }
   end
 end
