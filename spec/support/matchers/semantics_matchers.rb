@@ -1,3 +1,5 @@
+require 'support/helpers/parse_helper'
+
 module SemanticsMatchers
   include ParseHelper
   extend RSpec::Matchers::DSL

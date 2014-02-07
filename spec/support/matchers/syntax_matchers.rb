@@ -1,3 +1,5 @@
+require 'support/helpers/parse_helper'
+
 module SyntaxMatchers
   include ParseHelper
   extend RSpec::Matchers::DSL
