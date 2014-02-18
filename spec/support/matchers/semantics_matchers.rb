@@ -27,7 +27,7 @@ module SemanticsMatchers
       evaluate(actual) == parse_s_expression(expected)
     end
 
-    failure_message_for_should do |actual|
+    failure_message do |actual|
       "expected #{actual.inspect} to evaluate to #{expected.inspect}, but it evaluated to #{evaluate(actual).inspect}"
     end
   end
@@ -44,7 +44,7 @@ module SemanticsMatchers
       end
     end
 
-    failure_message_for_should do |actual|
+    failure_message do |actual|
       "expected #{actual.inspect} to evaluate to nothing, but it evaluated to #{evaluate(actual).inspect}"
     end
   end
@@ -97,7 +97,7 @@ module SemanticsMatchers
       "cons with #{cdr.inspect} to make #{expected.inspect}"
     end
 
-    failure_message_for_should do |car|
+    failure_message do |car|
       "expected #{car.inspect} to cons with #{cdr.inspect} to make #{expected.inspect}, but it made #{evaluate(car).cons(evaluate(cdr)).inspect}"
     end
   end
