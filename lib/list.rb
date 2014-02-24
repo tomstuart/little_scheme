@@ -6,8 +6,12 @@ class List
   def evaluate(env)
     function, *arguments = array
     operation = function.symbol
-    first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
-    first_argument.send(operation, *other_arguments)
+    if operation == :quote
+      arguments.first
+    else
+      first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
+      first_argument.send(operation, *other_arguments)
+    end
   end
 
   def car
