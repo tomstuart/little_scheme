@@ -13,7 +13,7 @@ grammar Scheme
   end
 
   rule atom
-    [0-9a-z]+ {
+    [^\s()]+ {
       def to_ast
         Atom.new(text_value)
       end
