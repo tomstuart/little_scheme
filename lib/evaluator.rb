@@ -9,8 +9,15 @@ class Evaluator
       env[@program.symbol]
     when List
       function, argument = @program.car, @program.cdr.car
-      operation = function.symbol
-      self.class.new(argument).evaluate(env).send(operation)
+      case operation = function.symbol
+      when :cons
+        second_argument = self.class.new(@program.cdr.cdr.car).evaluate(env)
+        self.class.new(argument).evaluate(env).send(operation, second_argument)
+      when :car, :cdr
+        self.class.new(argument).evaluate(env).send(operation)
+      else
+        raise
+      end
     else
       raise
     end
