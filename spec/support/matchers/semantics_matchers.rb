@@ -145,4 +145,35 @@ module SemanticsMatchers
       evaluate(actual).atom?
     end
   end
+
+  matcher :evaluate_to_a_rel do |actual|
+    include EvaluatingMatcher
+
+    match do |actual|
+      s_expression = evaluate(actual)
+      s_expression.list? &&
+        s_expression.s_expressions.all? { |element| element.list? && element.s_expressions.length == 2 } &&
+        s_expression.s_expressions.length == s_expression.s_expressions.uniq.length
+    end
+  end
+
+  matcher :evaluate_to_a_fun do |actual|
+    include EvaluatingMatcher
+
+    match do |actual|
+      s_expression = evaluate(actual)
+      evaluate_to_a_rel.where(environment).matches?(actual) &&
+        s_expression.s_expressions.length == s_expression.s_expressions.map { |element| element.s_expressions.first }.uniq.length
+    end
+  end
+
+  matcher :evaluate_to_a_fullfun do |actual|
+    include EvaluatingMatcher
+
+    match do |actual|
+      s_expression = evaluate(actual)
+      evaluate_to_a_fun.where(environment).matches?(actual) &&
+        s_expression.s_expressions.length == s_expression.s_expressions.map { |element| element.s_expressions[1] }.uniq.length
+    end
+  end
 end
