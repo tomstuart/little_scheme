@@ -5,6 +5,9 @@ class Atom
     @symbol = symbol
   end
 
+  TRUE = new(:'#t').freeze
+  FALSE = new(:'#f').freeze
+
   def evaluate(env)
     env[symbol]
   end

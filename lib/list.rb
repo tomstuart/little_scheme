@@ -29,7 +29,7 @@ class List
   end
 
   def null?
-    array.empty?
+    array.empty? ? Atom::TRUE : Atom::FALSE
   end
 
   def ==(other)
