@@ -5,9 +5,8 @@ class Evaluator
       env[program.symbol]
     when List
       function, arguments = program.car, program.cdr.send(:array)
-      first_argument = evaluate(arguments[0], env)
       operation = function.symbol
-      other_arguments = arguments[1..-1].map { |a| evaluate(a, env) }
+      first_argument, *other_arguments = arguments.map { |a| evaluate(a, env) }
       first_argument.send(operation, *other_arguments)
     else
       raise
