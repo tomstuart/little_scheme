@@ -5,12 +5,13 @@ class Evaluator
       env[program.symbol]
     when List
       function, argument = program.car, program.cdr.car
+      first_argument = evaluate(argument, env)
       case operation = function.symbol
       when :cons
         second_argument = evaluate(program.cdr.cdr.car, env)
-        evaluate(argument, env).send(operation, second_argument)
+        first_argument.send(operation, second_argument)
       when :car, :cdr
-        evaluate(argument, env).send(operation)
+        first_argument.send(operation)
       else
         raise
       end
