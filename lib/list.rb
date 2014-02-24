@@ -28,6 +28,10 @@ class List
     List.new(*([sexp] + array))
   end
 
+  def null?
+    array.empty?
+  end
+
   def ==(other)
     self.array == other.array
   end
