@@ -4,10 +4,12 @@ class List
   end
 
   def car
-    @array.first || raise
+    raise if @array.empty?
+    @array.first
   end
 
   def cdr
+    raise if @array.empty?
     self.class.new(*@array[1..-1])
   end
 
