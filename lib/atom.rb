@@ -12,4 +12,8 @@ class Atom
   def ==(other)
     self.symbol == other.symbol
   end
+
+  def inspect
+    symbol.to_s
+  end
 end

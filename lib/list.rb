@@ -25,6 +25,10 @@ class List
     self.array == other.array
   end
 
+  def inspect
+    "(#{@array.map(&:inspect).join(' ')})"
+  end
+
   protected
 
   attr_reader :array
