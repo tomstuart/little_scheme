@@ -14,7 +14,11 @@ class List
   end
 
   def cons(list)
-    List.new(*([self] + list.send(:array)))
+    list.prepend(self)
+  end
+
+  def prepend(sexp)
+    List.new(*([sexp] + array))
   end
 
   def ==(other)

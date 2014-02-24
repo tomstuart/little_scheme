@@ -6,7 +6,7 @@ class Atom
   end
 
   def cons(list)
-    List.new(*([self] + list.send(:array)))
+    list.prepend(self)
   end
 
   def ==(other)
