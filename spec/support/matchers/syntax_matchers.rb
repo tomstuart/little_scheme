@@ -50,4 +50,20 @@ module SyntaxMatchers
       s_expression.array.all? { |s_expression| s_expression.is_a?(Atom) && s_expression.number? }
     end
   end
+
+  matcher :be_an_arithmetic_expression do
+    def arithmetic_expression?(s_expressions)
+      if s_expressions.length == 1 && s_expressions.first.atom?
+        true
+      elsif s_expressions.length >= 3
+        first, op, *rest = s_expressions
+        arithmetic_expression?([first]) && arithmetic_expression?(rest) && op.atom? && %w(+ * expt).include?(op.name)
+      end
+    end
+
+    match do |string|
+      s_expressions = parse_program(string).s_expressions
+      arithmetic_expression?(s_expressions)
+    end
+  end
 end
