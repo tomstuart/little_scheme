@@ -9,16 +9,8 @@ class Evaluator
       env[@program.symbol]
     when List
       function, argument = @program.car, @program.cdr.car
-
       operation = function.symbol
-      case argument
-      when Atom
-        self.class.new(argument).evaluate(env).send(operation)
-      when List
-        self.class.new(argument).evaluate(env).send(operation)
-      else
-        raise
-      end
+      self.class.new(argument).evaluate(env).send(operation)
     else
       raise
     end
