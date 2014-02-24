@@ -33,7 +33,8 @@ module LittleScheme
 
       def evaluate(environment)
         environment = EnvironmentAdapter.new(environment)
-        result = Evaluator.new(__getobj__).evaluate(environment)
+        evaluator = Evaluator.new
+        result = evaluator.evaluate(__getobj__, environment)
         self.class.new(result)
       end
     end

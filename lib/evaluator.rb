@@ -1,20 +1,16 @@
 class Evaluator
-  def initialize(program)
-    @program = program
-  end
-
-  def evaluate(env={})
-    case @program
+  def evaluate(program, env={})
+    case program
     when Atom
-      env[@program.symbol]
+      env[program.symbol]
     when List
-      function, argument = @program.car, @program.cdr.car
+      function, argument = program.car, program.cdr.car
       case operation = function.symbol
       when :cons
-        second_argument = self.class.new(@program.cdr.cdr.car).evaluate(env)
-        self.class.new(argument).evaluate(env).send(operation, second_argument)
+        second_argument = evaluate(program.cdr.cdr.car, env)
+        evaluate(argument, env).send(operation, second_argument)
       when :car, :cdr
-        self.class.new(argument).evaluate(env).send(operation)
+        evaluate(argument, env).send(operation)
       else
         raise
       end
