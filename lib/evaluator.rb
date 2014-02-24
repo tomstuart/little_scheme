@@ -4,7 +4,7 @@ class Evaluator
     when Atom
       env[program.symbol]
     when List
-      function, arguments = program.car, program.cdr.send(:array)
+      function, *arguments = program.send(:array)
       operation = function.symbol
       first_argument, *other_arguments = arguments.map { |a| evaluate(a, env) }
       first_argument.send(operation, *other_arguments)
