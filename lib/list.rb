@@ -4,7 +4,7 @@ class List
   end
 
   def car
-    @array.first
+    @array.first || raise
   end
 
   def cdr
