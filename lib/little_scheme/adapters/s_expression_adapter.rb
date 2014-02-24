@@ -23,8 +23,12 @@ module LittleScheme
         super other.__getobj__
       end
 
+      def array
+        __getobj__.send(:array)
+      end
+
       def s_expressions
-        __getobj__.send(:array).map(&self.class.method(:new))
+        array.map(&self.class.method(:new))
       end
 
       def evaluate(environment)
