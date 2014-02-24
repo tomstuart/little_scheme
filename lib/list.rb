@@ -13,6 +13,10 @@ class List
     self.class.new(*@array[1..-1])
   end
 
+  def cons(list)
+    List.new(*([self] + list.send(:array)))
+  end
+
   def ==(other)
     self.array == other.array
   end
