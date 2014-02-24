@@ -3,6 +3,13 @@ class List
     @array = array
   end
 
+  def evaluate(env)
+    function, *arguments = array
+    operation = function.symbol
+    first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
+    first_argument.send(operation, *other_arguments)
+  end
+
   def car
     raise if @array.empty?
     @array.first
@@ -23,6 +30,10 @@ class List
 
   def ==(other)
     self.array == other.array
+  end
+
+  def to_a
+    array
   end
 
   def inspect

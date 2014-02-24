@@ -5,6 +5,10 @@ class Atom
     @symbol = symbol
   end
 
+  def evaluate(env)
+    env[symbol]
+  end
+
   def cons(list)
     list.prepend(self)
   end
