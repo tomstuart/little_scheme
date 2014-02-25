@@ -11,4 +11,4 @@ $ git checkout chapter-two
 $ bundle exec rspec
 ```
 
-The examples expect to be able to instantiate a class called `LittleScheme::Parser` and call its `parse` method to get the abstract syntax tree (AST) of a program, and then to be able to call a few methods (chiefly `evaluate`) on that AST. If you run the examples, the failures should guide you.
+The examples expect to be able to instantiate a class called `LittleScheme::Parser` and call its `parse` method to get the abstract syntax tree (AST) of a program, and then to be able to instantiate a class called `LittleScheme::Evaluator` and call its `evaluate` method to evaluate that AST. If you run the examples, the failures should guide you.
