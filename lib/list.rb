@@ -29,7 +29,7 @@ class List
   end
 
   def prepend(sexp)
-    List.new(*([sexp] + array))
+    List.new(sexp, *array)
   end
 
   def null?
