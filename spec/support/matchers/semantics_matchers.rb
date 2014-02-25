@@ -12,7 +12,7 @@ module SemanticsMatchers
     end
 
     def environment
-      @environment || {}
+      @environment ||= {}
     end
 
     def evaluate(string)
