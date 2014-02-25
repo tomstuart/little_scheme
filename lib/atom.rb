@@ -5,7 +5,22 @@ class Atom
     @symbol = symbol
   end
 
+  TRUE = new(:'#t').freeze
+  FALSE = new(:'#f').freeze
+
+  def evaluate(env)
+    env[symbol]
+  end
+
+  def cons(list)
+    list.prepend(self)
+  end
+
   def ==(other)
     self.symbol == other.symbol
+  end
+
+  def inspect
+    symbol.to_s
   end
 end

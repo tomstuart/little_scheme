@@ -11,7 +11,7 @@ describe 'a little Scheme' do
 
     specify { expect('(atom)').to be_a_list }
     specify { expect('(atom turkey or)').to be_a_list }
-    specify { expect('(atom turkey) or').not_to be_a_list }
+    specify { pending; expect('(atom turkey) or').not_to be_a_list }
     specify { expect('((atom turkey) or)').to be_a_list }
 
     specify { expect('xyz').to be_an_s_expression }
