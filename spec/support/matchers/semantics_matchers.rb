@@ -1,6 +1,8 @@
+require 'support/helpers/evaluate_helper'
 require 'support/helpers/parse_helper'
 
 module SemanticsMatchers
+  include EvaluateHelper
   include ParseHelper
   extend RSpec::Matchers::DSL
 
@@ -16,7 +18,9 @@ module SemanticsMatchers
     end
 
     def evaluate(string)
-      parse_program(string).evaluate(Hash[environment.map { |k, v| [k, parse_s_expression(v)] }])
+      evaluation_environment = Hash[environment.map { |name, string| [name, parse_s_expression(string)] }]
+
+      evaluate_program(parse_program(string), evaluation_environment)
     end
   end
 
