@@ -40,10 +40,6 @@ class List
     self.array == other.array
   end
 
-  def to_a
-    array
-  end
-
   def inspect
     "(#{@array.map(&:inspect).join(' ')})"
   end
