@@ -1,6 +1,6 @@
 grammar Scheme
   rule sexp
-    atom / list
+    atom / quoted_null_list / list
   end
 
   rule list
@@ -16,6 +16,14 @@ grammar Scheme
     [^\s()]+ {
       def to_ast
         Atom.new(text_value.to_sym)
+      end
+    }
+  end
+
+  rule quoted_null_list
+    '(quote ())' {
+      def to_ast
+        List.new
       end
     }
   end

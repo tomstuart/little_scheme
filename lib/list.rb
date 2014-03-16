@@ -4,10 +4,14 @@ class List
   end
 
   def evaluate(env)
-    function, *arguments = array
-    operation = function.symbol
-    first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
-    first_argument.send(operation, *other_arguments)
+    if @array.empty?
+      self
+    else
+      function, *arguments = array
+      operation = function.symbol
+      first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
+      first_argument.send(operation, *other_arguments)
+    end
   end
 
   def car
