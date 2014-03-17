@@ -17,6 +17,9 @@ class Atom
   end
 
   def eq?(other)
+    raise if self.symbol =~ /^\d+$/
+    raise if other.symbol =~ /^\d+$/
+
     self == other ? TRUE : FALSE
   end
 
