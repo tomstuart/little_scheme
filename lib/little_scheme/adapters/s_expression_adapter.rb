@@ -20,7 +20,7 @@ module LittleScheme
       end
 
       def ==(other)
-        super other.__getobj__
+        super(other) || super(other.__getobj__)
       end
 
       def array
