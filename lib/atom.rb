@@ -16,6 +16,10 @@ class Atom
     TRUE
   end
 
+  def eq?(other)
+    self == other ? TRUE : FALSE
+  end
+
   def cons(list)
     list.prepend(self)
   end
