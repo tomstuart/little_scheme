@@ -8,7 +8,7 @@ module LittleScheme
   module Adapters
     class SExpressionAdapter < SimpleDelegator
       def atom?
-        __getobj__.is_a?(Atom)
+        __getobj__.atom?
       end
 
       def list?

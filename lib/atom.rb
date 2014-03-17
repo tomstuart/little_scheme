@@ -12,6 +12,10 @@ class Atom
     env[symbol]
   end
 
+  def atom?
+    TRUE
+  end
+
   def cons(list)
     list.prepend(self)
   end

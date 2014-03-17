@@ -36,6 +36,10 @@ class List
     array.empty? ? Atom::TRUE : Atom::FALSE
   end
 
+  def atom?
+    Atom::FALSE
+  end
+
   def ==(other)
     self.array == other.array
   end
