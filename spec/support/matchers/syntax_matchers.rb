@@ -31,7 +31,7 @@ module SyntaxMatchers
 
   matcher :contain_the_s_expressions do |*expected|
     match do |string|
-      parse_s_expression(string).s_expressions == expected.map(&method(:parse_s_expression))
+      parse_s_expression(string).array == expected.map(&method(:parse_s_expression))
     end
   end
 end

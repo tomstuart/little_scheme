@@ -17,10 +17,6 @@ module LittleScheme
         __getobj__.send(:array)
       end
 
-      def s_expressions
-        array.map(&self.class.method(:new))
-      end
-
       def evaluate(environment)
         evaluator = ::Evaluator.new
         result = evaluator.evaluate(__getobj__, environment)
