@@ -1,4 +1,3 @@
-require 'atom'
 require 'delegate'
 require 'evaluator'
 require 'list'
