@@ -1,5 +1,8 @@
-require 'little_scheme/adapters/parser_adapter'
+require 'atom'
+require 'list'
+require 'treetop'
+Treetop.load(File.expand_path('../../scheme.treetop', __FILE__))
 
 module LittleScheme
-  Parser = Adapters::ParserAdapter
+  Parser = ::SchemeParser
 end
