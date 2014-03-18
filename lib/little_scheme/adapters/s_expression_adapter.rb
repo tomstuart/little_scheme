@@ -1,7 +1,6 @@
 require 'delegate'
 require 'evaluator'
 require 'list'
-require 'little_scheme/adapters/environment_adapter'
 
 module LittleScheme
   module Adapters
@@ -27,7 +26,6 @@ module LittleScheme
       end
 
       def evaluate(environment)
-        environment = EnvironmentAdapter.new(environment)
         evaluator = ::Evaluator.new
         result = evaluator.evaluate(__getobj__, environment)
         self.class.new(result)
