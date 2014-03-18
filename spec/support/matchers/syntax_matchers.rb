@@ -20,8 +20,12 @@ module SyntaxMatchers
 
   matcher :be_an_s_expression do
     match do |string|
-      s_expression = parse_s_expression(string)
-      s_expression.s_expression?
+      begin
+        raise unless parse_s_expression(string)
+        true
+      rescue
+        false
+      end
     end
   end
 

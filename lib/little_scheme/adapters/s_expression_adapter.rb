@@ -13,10 +13,6 @@ module LittleScheme
         __getobj__.is_a?(List)
       end
 
-      def s_expression?
-        true
-      end
-
       def array
         __getobj__.send(:array)
       end
