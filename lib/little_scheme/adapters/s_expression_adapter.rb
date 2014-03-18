@@ -13,10 +13,6 @@ module LittleScheme
         __getobj__.is_a?(List)
       end
 
-      def array
-        __getobj__.send(:array)
-      end
-
       def evaluate(environment)
         evaluator = ::Evaluator.new
         result = evaluator.evaluate(__getobj__, environment)
