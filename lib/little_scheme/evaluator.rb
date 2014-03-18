@@ -1,5 +1,5 @@
-require 'little_scheme/adapters/evaluator_adapter'
+require 'evaluator'
 
 module LittleScheme
-  Evaluator = Adapters::EvaluatorAdapter
+  Evaluator = ::Evaluator
 end
