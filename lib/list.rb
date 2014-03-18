@@ -50,7 +50,5 @@ class List
     "(#{@array.map(&:inspect).join(' ')})"
   end
 
-  protected
-
   attr_reader :array
 end

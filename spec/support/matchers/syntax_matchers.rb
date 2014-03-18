@@ -1,3 +1,5 @@
+require 'atom'
+require 'list'
 require 'support/helpers/parse_helper'
 
 module SyntaxMatchers
@@ -6,28 +8,32 @@ module SyntaxMatchers
 
   matcher :be_an_atom do
     match do |string|
-      s_expressions = parse_program(string).s_expressions
-      s_expressions.length == 1 && s_expressions.first.atom? == Atom::TRUE
+      s_expression = parse_s_expression(string)
+      s_expression.is_a?(Atom)
     end
   end
 
   matcher :be_a_list do
     match do |string|
-      s_expressions = parse_program(string).s_expressions
-      s_expressions.length == 1 && s_expressions.first.list?
+      s_expression = parse_s_expression(string)
+      s_expression.is_a?(List)
     end
   end
 
   matcher :be_an_s_expression do
     match do |string|
-      s_expressions = parse_program(string).s_expressions
-      s_expressions.length == 1 && s_expressions.first.s_expression?
+      begin
+        raise unless parse_s_expression(string)
+        true
+      rescue
+        false
+      end
     end
   end
 
   matcher :contain_the_s_expressions do |*expected|
     match do |string|
-      parse_s_expression(string).s_expressions == expected.map(&method(:parse_s_expression))
+      parse_s_expression(string).array == expected.map(&method(:parse_s_expression))
     end
   end
 end

@@ -20,7 +20,7 @@ module SemanticsMatchers
     def evaluate(string)
       evaluation_environment = definitions.merge(Hash[environment.map { |name, string| [name, parse_s_expression(string)] }])
 
-      evaluate_program(parse_program(string), evaluation_environment)
+      evaluate_s_expression(parse_s_expression(string), evaluation_environment)
     end
   end
 
