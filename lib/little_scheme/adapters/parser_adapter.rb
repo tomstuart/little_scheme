@@ -7,7 +7,7 @@ module LittleScheme
   module Adapters
     class ParserAdapter
       def parse(string)
-        SchemeParser.new.parse(string).to_ast
+        SchemeParser.new.parse(string)
       end
     end
   end
