@@ -18,10 +18,6 @@ module LittleScheme
         true
       end
 
-      def ==(other)
-        super(other) || super(other.__getobj__)
-      end
-
       def array
         __getobj__.send(:array)
       end
