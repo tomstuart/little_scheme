@@ -1,3 +1,5 @@
+require 'atom'
+require 'list'
 require 'support/helpers/parse_helper'
 
 module SyntaxMatchers
@@ -7,14 +9,14 @@ module SyntaxMatchers
   matcher :be_an_atom do
     match do |string|
       s_expression = parse_s_expression(string)
-      s_expression.atom? == Atom::TRUE
+      s_expression.is_a?(Atom)
     end
   end
 
   matcher :be_a_list do
     match do |string|
       s_expression = parse_s_expression(string)
-      s_expression.list?
+      s_expression.is_a?(List)
     end
   end
 
