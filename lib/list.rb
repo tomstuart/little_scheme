@@ -8,6 +8,8 @@ class List
     operation = function.symbol
     if operation == :quote
       arguments.first
+    elsif operation == :cond
+      arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
     else
       first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
       first_argument.send(operation, *other_arguments)
@@ -34,6 +36,10 @@ class List
 
   def null?
     array.empty? ? Atom::TRUE : Atom::FALSE
+  end
+
+  def atom?
+    Atom::FALSE
   end
 
   def ==(other)

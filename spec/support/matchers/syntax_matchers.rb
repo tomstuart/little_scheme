@@ -7,7 +7,7 @@ module SyntaxMatchers
   matcher :be_an_atom do
     match do |string|
       s_expressions = parse_program(string).s_expressions
-      s_expressions.length == 1 && s_expressions.first.atom?
+      s_expressions.length == 1 && s_expressions.first.atom? == Atom::TRUE
     end
   end
 

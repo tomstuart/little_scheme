@@ -8,7 +8,7 @@ module LittleScheme
   module Adapters
     class SExpressionAdapter < SimpleDelegator
       def atom?
-        __getobj__.is_a?(Atom)
+        __getobj__.atom?
       end
 
       def list?
@@ -20,7 +20,7 @@ module LittleScheme
       end
 
       def ==(other)
-        super other.__getobj__
+        super(other) || super(other.__getobj__)
       end
 
       def array

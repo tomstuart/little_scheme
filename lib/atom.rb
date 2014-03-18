@@ -9,7 +9,22 @@ class Atom
   FALSE = new(:'#f').freeze
 
   def evaluate(env)
-    env[symbol]
+    if symbol == :else
+      TRUE
+    else
+      env[symbol]
+    end
+  end
+
+  def atom?
+    TRUE
+  end
+
+  def eq?(other)
+    raise if self.symbol =~ /^\d+$/
+    raise if other.symbol =~ /^\d+$/
+
+    self == other ? TRUE : FALSE
   end
 
   def cons(list)
