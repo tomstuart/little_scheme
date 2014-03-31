@@ -9,9 +9,9 @@ class List
     function, *arguments = array
     if function.is_a? List
       expression = function.cdr.cdr.car
-      parameter_name = function.cdr.car.car
+      parameter = function.cdr.car.car
 
-      Lambda.new(parameter_name, expression).evaluate(env, arguments.first.evaluate(env))
+      Lambda.new(parameter, expression).evaluate(env, arguments.first.evaluate(env))
     else
       operation = function.symbol
       if env.key?(operation)

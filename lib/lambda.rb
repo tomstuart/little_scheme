@@ -1,13 +1,13 @@
 class Lambda
-  attr_reader :parameter_name, :expression
+  attr_reader :parameter, :expression
 
-  def initialize(parameter_name, expression)
-    @parameter_name = parameter_name
+  def initialize(parameter, expression)
+    @parameter = parameter
     @expression = expression
   end
 
   def evaluate(env, argument)
-    local_env = env.merge(parameter_name.symbol => argument.evaluate(env))
+    local_env = env.merge(parameter.symbol => argument.evaluate(env))
     expression.evaluate(local_env)
   end
 end
