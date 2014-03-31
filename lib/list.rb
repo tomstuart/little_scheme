@@ -6,11 +6,11 @@ class List
   def evaluate(env)
     function, *arguments = array
     if function.is_a? List
-      program = function.cdr.cdr.car
-      variable = function.cdr.car.car.symbol
-      environment = env.merge(variable => arguments.first.evaluate(env))
+      expression = function.cdr.cdr.car
+      parameter_name = function.cdr.car.car.symbol
+      local_env = env.merge(parameter_name => arguments.first.evaluate(env))
 
-      program.evaluate(environment)
+      expression.evaluate(local_env)
     else
       operation = function.symbol
       if operation == :quote
