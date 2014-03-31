@@ -5,14 +5,22 @@ class List
 
   def evaluate(env)
     function, *arguments = array
-    operation = function.symbol
-    if operation == :quote
-      arguments.first
-    elsif operation == :cond
-      arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
+    if function.is_a? List
+      program = function.cdr.cdr.car
+      variable = function.cdr.car.car.symbol
+      environment = env.merge(variable => arguments.first.evaluate(env))
+
+      program.evaluate(environment)
     else
-      first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
-      first_argument.send(operation, *other_arguments)
+      operation = function.symbol
+      if operation == :quote
+        arguments.first
+      elsif operation == :cond
+        arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
+      else
+        first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
+        first_argument.send(operation, *other_arguments)
+      end
     end
   end
 
