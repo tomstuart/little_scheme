@@ -13,9 +13,10 @@ class List
       expression.evaluate(local_env)
     else
       operation = function.symbol
-      if operation == :quote
+      case operation
+      when :quote
         arguments.first
-      elsif operation == :cond
+      when :cond
         arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
       else
         first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
