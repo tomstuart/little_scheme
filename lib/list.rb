@@ -1,3 +1,5 @@
+require 'lambda'
+
 class List
   def initialize(*array)
     @array = array
@@ -13,14 +15,20 @@ class List
       expression.evaluate(local_env)
     else
       operation = function.symbol
-      case operation
-      when :quote
-        arguments.first
-      when :cond
-        arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
+      if env.key?(operation)
+        env[operation].evaluate(env, arguments.first)
       else
-        first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
-        first_argument.send(operation, *other_arguments)
+        case operation
+        when :lambda
+          Lambda.new(arguments.first.car, arguments.last)
+        when :quote
+          arguments.first
+        when :cond
+          arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
+        else
+          first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
+          first_argument.send(operation, *other_arguments)
+        end
       end
     end
   end

@@ -14,6 +14,12 @@ describe 'a little Scheme' do
       it { is_expected.to evaluate_to('a-list').where env.merge l: '((x y) z)' }
     end
 
+    describe '(foo bar)' do
+      define :foo, '(lambda (x) x)'
+
+      it { is_expected.to evaluate_to('a').where bar: 'a' }
+    end
+
     describe '(lat? l)' do
       define :lat?, '(lambda (m) (cond ((null? m) #t) ((atom? (car m)) (lat? (cdr m))) (else #f)))'
 
