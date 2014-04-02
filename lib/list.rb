@@ -11,7 +11,7 @@ class List
       expression = function.cdr.cdr.car
       parameter = function.cdr.car.car
 
-      Lambda.new(parameter, expression).evaluate(env, arguments.first.evaluate(env))
+      Lambda.new(parameter, expression).evaluate(env, arguments.first)
     else
       operation = function.symbol
       if env.key?(operation)
