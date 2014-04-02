@@ -9,7 +9,9 @@ class Atom
   FALSE = new(:'#f').freeze
 
   def evaluate(env)
-    if symbol == :else
+    if self == TRUE || self == FALSE
+      self
+    elsif symbol == :else
       TRUE
     else
       env[symbol]
