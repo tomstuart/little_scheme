@@ -24,6 +24,8 @@ class List
           arguments.first
         when :cond
           arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
+        when :or
+          arguments.first.evaluate(env) == Atom::TRUE ? Atom::TRUE : arguments.last.evaluate(env)
         else
           first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
           first_argument.send(operation, *other_arguments)
