@@ -11,15 +11,15 @@ class List
       expression = function.cdr.cdr.car
       parameter = function.cdr.car.car
 
-      Lambda.new(parameter, expression).evaluate(env, arguments.first)
+      Lambda.new([parameter], expression).evaluate(env, [arguments.first])
     else
       operation = function.symbol
       if env.key?(operation)
-        env[operation].evaluate(env, arguments.first)
+        env[operation].evaluate(env, [arguments.first])
       else
         case operation
         when :lambda
-          Lambda.new(arguments.first.car, arguments.last)
+          Lambda.new([arguments.first.car], arguments.last)
         when :quote
           arguments.first
         when :cond
