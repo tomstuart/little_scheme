@@ -1,13 +1,15 @@
 class Lambda
-  attr_reader :parameter, :expression
+  attr_reader :parameters, :expression
 
-  def initialize(parameter, expression)
-    @parameter = parameter
+  def initialize(parameters, expression)
+    @parameters = parameters
     @expression = expression
   end
 
-  def evaluate(env, argument)
-    local_env = env.merge(parameter.symbol => argument.evaluate(env))
+  def evaluate(env, arguments)
+    key_value_pairs = parameters.zip(arguments).map { |parameter, argument| [parameter.symbol, argument.evaluate(env)] }
+    arguments_env = Hash[key_value_pairs]
+    local_env = env.merge(arguments_env)
     expression.evaluate(local_env)
   end
 end

@@ -8,22 +8,27 @@ class List
   def evaluate(env)
     function, *arguments = array
     if function.is_a? List
+      parameters = function.cdr.car.array
       expression = function.cdr.cdr.car
-      parameter = function.cdr.car.car
 
-      Lambda.new(parameter, expression).evaluate(env, arguments.first)
+      Lambda.new(parameters, expression).evaluate(env, arguments)
     else
       operation = function.symbol
       if env.key?(operation)
-        env[operation].evaluate(env, arguments.first)
+        env[operation].evaluate(env, arguments)
       else
         case operation
         when :lambda
-          Lambda.new(arguments.first.car, arguments.last)
+          parameters = arguments.first.array
+          expression = arguments.last
+
+          Lambda.new(parameters, expression)
         when :quote
           arguments.first
         when :cond
           arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
+        when :or
+          arguments.first.evaluate(env) == Atom::TRUE ? Atom::TRUE : arguments.last.evaluate(env)
         else
           first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
           first_argument.send(operation, *other_arguments)
