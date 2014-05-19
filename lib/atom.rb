@@ -34,7 +34,7 @@ class Atom
   end
 
   def ==(other)
-    self.symbol == other.symbol
+    other.is_a?(Atom) && self.symbol == other.symbol
   end
 
   def inspect

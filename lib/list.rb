@@ -46,7 +46,7 @@ class List
   end
 
   def ==(other)
-    self.array == other.array
+    other.is_a?(List) && self.array == other.array
   end
 
   def inspect
