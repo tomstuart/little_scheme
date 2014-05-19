@@ -23,15 +23,11 @@ class Atom
   end
 
   def number?
-    Integer(symbol.to_s)
-    true
-  rescue ArgumentError
-    false
+    symbol =~ /^\d+$/
   end
 
   def eq?(other)
-    raise if self.symbol =~ /^\d+$/
-    raise if other.symbol =~ /^\d+$/
+    raise if [self, other].any?(&:number?)
 
     self == other ? TRUE : FALSE
   end
