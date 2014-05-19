@@ -7,7 +7,7 @@ class List
 
   def evaluate(env)
     operation, *arguments = array
-    env[operation.symbol].evaluate(env, arguments)
+    env[operation.symbol].apply(env, arguments)
   end
 
   def car

@@ -4,7 +4,7 @@ class Evaluator
       @block = block
     end
 
-    def evaluate(env, arguments)
+    def apply(env, arguments)
       @block.call(env, arguments)
     end
   end
@@ -14,7 +14,7 @@ class Evaluator
       @operation = operation
     end
 
-    def evaluate(env, arguments)
+    def apply(env, arguments)
       first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
       first_argument.send(@operation, *other_arguments)
     end
