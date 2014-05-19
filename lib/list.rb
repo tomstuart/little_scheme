@@ -6,17 +6,8 @@ class List
   end
 
   def evaluate(env)
-    function, *arguments = array
-
-    operation = function.symbol
-    if env.key?(operation)
-      env[operation].evaluate(env, arguments)
-    else
-      # Call some method on the actual Ruby representation of a value
-      # e.g. evaluate (car a) by calling List#car on the object a
-      first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
-      first_argument.send(operation, *other_arguments)
-    end
+    operation, *arguments = array
+    env[operation.symbol].evaluate(env, arguments)
   end
 
   def car
