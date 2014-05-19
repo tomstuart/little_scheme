@@ -39,8 +39,8 @@ module SyntaxMatchers
 
   matcher :be_a_number do
     match do |string|
-      s_expressions = parse_program(string).s_expressions
-      s_expressions.length == 1 && s_expressions.first.number?
+      s_expression = parse_s_expression(string)
+      s_expression.number?
     end
   end
 
