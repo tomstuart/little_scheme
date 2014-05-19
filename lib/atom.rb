@@ -11,8 +11,6 @@ class Atom
   def evaluate(env)
     if self == TRUE || self == FALSE
       self
-    elsif symbol == :else
-      TRUE
     else
       env[symbol]
     end

@@ -21,7 +21,7 @@ class Evaluator
         arguments.first
       },
       cond: Keyword.new { |env, arguments|
-        arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
+        arguments.detect { |list| list.car == Atom.new(:else) || list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
       },
       or: Keyword.new { |env, arguments|
         arguments.first.evaluate(env) == Atom::TRUE ? Atom::TRUE : arguments.last.evaluate(env)
