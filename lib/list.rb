@@ -18,8 +18,6 @@ class List
         expression = arguments.last
 
         Lambda.new(parameters, expression)
-      when :quote
-        arguments.first
       when :cond
         arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
       when :or
