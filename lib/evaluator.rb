@@ -44,7 +44,8 @@ class Evaluator
     cons: Primitive.new(:cons),
     null?: Primitive.new(:null?),
     atom?: Primitive.new(:atom?),
-    eq?: Primitive.new(:eq?)
+    eq?: Primitive.new(:eq?),
+    add1: Primitive.new(:add1)
   }
 
   INITIAL_ENVIRONMENT = KEYWORDS.merge(PRIMITIVES)

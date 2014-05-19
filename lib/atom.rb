@@ -38,4 +38,8 @@ class Atom
   def inspect
     symbol.to_s
   end
+
+  def add1
+    Atom.new((symbol.to_s.to_i + 1).to_s.to_sym)
+  end
 end
