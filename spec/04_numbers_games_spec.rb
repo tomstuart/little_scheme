@@ -6,8 +6,8 @@ describe 'a little Scheme' do
     specify { expect('14').to be_an_atom }
     specify { expect('(atom? n)').to evaluate_to_true.where n: '14' }
 
-    specify { pending; expect('-3').to be_a_number }
-    specify { pending; expect('3.14159').to be_a_number }
+    specify { skip; expect('-3').to be_a_number }
+    specify { skip; expect('3.14159').to be_a_number }
 
     specify { expect('(add1 n)').to evaluate_to('68').where n: '67' }
     specify { expect('(add1 67)').to evaluate_to '68' }
