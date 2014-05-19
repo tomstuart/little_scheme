@@ -12,22 +12,10 @@ class List
     if env.key?(operation)
       env[operation].evaluate(env, arguments)
     else
-      case operation
-      when :lambda
-        parameters = arguments.first.array
-        expression = arguments.last
-
-        Lambda.new(parameters, expression)
-      when :cond
-        arguments.detect { |list| list.car.evaluate(env) == Atom::TRUE }.cdr.car.evaluate(env)
-      when :or
-        arguments.first.evaluate(env) == Atom::TRUE ? Atom::TRUE : arguments.last.evaluate(env)
-      else
-        # Call some method on the actual Ruby representation of a value
-        # e.g. evaluate (car a) by calling List#car on the object a
-        first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
-        first_argument.send(operation, *other_arguments)
-      end
+      # Call some method on the actual Ruby representation of a value
+      # e.g. evaluate (car a) by calling List#car on the object a
+      first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
+      first_argument.send(operation, *other_arguments)
     end
   end
 
