@@ -49,6 +49,8 @@ class Atom
   end
 
   def sub1
-    Atom.new((symbol.to_s.to_i - 1).to_s)
+    Atom.new((symbol.to_s.to_i - 1).to_s).tap do |result|
+      raise unless result.number?
+    end
   end
 end
