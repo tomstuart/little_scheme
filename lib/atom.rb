@@ -2,7 +2,7 @@ class Atom
   attr_reader :symbol
 
   def initialize(symbol)
-    @symbol = symbol
+    @symbol = symbol.to_sym
   end
 
   TRUE = new(:'#t').freeze
@@ -40,6 +40,6 @@ class Atom
   end
 
   def add1
-    Atom.new((symbol.to_s.to_i + 1).to_s.to_sym)
+    Atom.new((symbol.to_s.to_i + 1).to_s)
   end
 end
