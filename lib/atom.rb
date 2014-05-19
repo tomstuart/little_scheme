@@ -11,6 +11,8 @@ class Atom
   def evaluate(env)
     if self == TRUE || self == FALSE
       self
+    elsif number?
+      self
     else
       env[symbol]
     end
@@ -18,6 +20,13 @@ class Atom
 
   def atom?
     TRUE
+  end
+
+  def number?
+    Integer(symbol.to_s)
+    true
+  rescue ArgumentError
+    false
   end
 
   def eq?(other)
@@ -41,5 +50,9 @@ class Atom
 
   def add1
     Atom.new((symbol.to_s.to_i + 1).to_s)
+  end
+
+  def sub1
+    Atom.new((symbol.to_s.to_i - 1).to_s)
   end
 end
