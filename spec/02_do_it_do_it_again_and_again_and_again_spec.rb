@@ -3,7 +3,7 @@ describe 'a little Scheme' do
     include SemanticsMatchers
 
     # The book doesn't test lambda, but we will.
-    specify { expect('((lambda (l) (car (cdr l))) letters)').to evaluate_to('b').where letters: '(a b c d)' }
+    specify { pending; expect('((lambda (l) (car (cdr l))) letters)').to evaluate_to('b').where letters: '(a b c d)' }
 
     # The book doesn't test cond, but we will.
     describe '(cond ((null? l) a) ((atom? (car l)) b) (else c))' do

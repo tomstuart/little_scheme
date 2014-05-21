@@ -2,7 +2,7 @@ class Atom
   attr_reader :symbol
 
   def initialize(symbol)
-    @symbol = symbol
+    @symbol = symbol.to_sym
   end
 
   TRUE = new(:'#t').freeze
@@ -11,8 +11,8 @@ class Atom
   def evaluate(env)
     if self == TRUE || self == FALSE
       self
-    elsif symbol == :else
-      TRUE
+    elsif number?
+      self
     else
       env[symbol]
     end
@@ -22,9 +22,12 @@ class Atom
     TRUE
   end
 
+  def number?
+    symbol =~ /^\d+$/
+  end
+
   def eq?(other)
-    raise if self.symbol =~ /^\d+$/
-    raise if other.symbol =~ /^\d+$/
+    raise if [self, other].any?(&:number?)
 
     self == other ? TRUE : FALSE
   end
@@ -34,10 +37,20 @@ class Atom
   end
 
   def ==(other)
-    self.symbol == other.symbol
+    other.is_a?(Atom) && self.symbol == other.symbol
   end
 
   def inspect
     symbol.to_s
+  end
+
+  def add1
+    Atom.new((symbol.to_s.to_i + 1).to_s)
+  end
+
+  def sub1
+    Atom.new((symbol.to_s.to_i - 1).to_s).tap do |result|
+      raise unless result.number?
+    end
   end
 end

@@ -6,7 +6,7 @@ class Lambda
     @expression = expression
   end
 
-  def evaluate(env, arguments)
+  def apply(env, arguments)
     key_value_pairs = parameters.zip(arguments).map { |parameter, argument| [parameter.symbol, argument.evaluate(env)] }
     arguments_env = Hash[key_value_pairs]
     local_env = env.merge(arguments_env)
