@@ -35,6 +35,9 @@ class Evaluator
     },
     or: Keyword.new { |env, arguments|
       arguments.first.evaluate(env) == Atom::TRUE ? Atom::TRUE : arguments.last.evaluate(env)
+    },
+    and: Keyword.new { |env, arguments|
+      arguments.first.evaluate(env) == Atom::FALSE ? Atom::FALSE : arguments.last.evaluate(env)
     }
   }
 
