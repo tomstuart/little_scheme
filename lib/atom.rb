@@ -53,4 +53,8 @@ class Atom
       raise unless result.number?
     end
   end
+
+  def zero?
+    symbol == :'0' ? TRUE : FALSE
+  end
 end
