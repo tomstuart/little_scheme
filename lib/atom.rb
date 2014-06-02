@@ -45,16 +45,22 @@ class Atom
   end
 
   def add1
-    Atom.new((symbol.to_s.to_i + 1).to_s)
+    Atom.new((integer + 1).to_s)
   end
 
   def sub1
-    Atom.new((symbol.to_s.to_i - 1).to_s).tap do |result|
+    Atom.new((integer - 1).to_s).tap do |result|
       raise unless result.number?
     end
   end
 
   def zero?
-    symbol == :'0' ? TRUE : FALSE
+    integer.zero? ? TRUE : FALSE
+  end
+
+  private
+
+  def integer
+    symbol.to_s.to_i
   end
 end
