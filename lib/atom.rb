@@ -14,7 +14,7 @@ class Atom
     elsif number?
       self
     else
-      env[symbol]
+      env.fetch(symbol)
     end
   end
 
