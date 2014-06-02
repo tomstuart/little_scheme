@@ -8,6 +8,10 @@ class Atom
   TRUE = new(:'#t').freeze
   FALSE = new(:'#f').freeze
 
+  def self.from_boolean(boolean)
+    boolean ? TRUE : FALSE
+  end
+
   def evaluate(env)
     if self == TRUE || self == FALSE
       self
@@ -29,7 +33,7 @@ class Atom
   def eq?(other)
     raise if [self, other].any?(&:number?)
 
-    self == other ? TRUE : FALSE
+    Atom.from_boolean(self == other)
   end
 
   def cons(list)
@@ -55,7 +59,7 @@ class Atom
   end
 
   def zero?
-    integer.zero? ? TRUE : FALSE
+    Atom.from_boolean(integer.zero?)
   end
 
   private

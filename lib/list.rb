@@ -29,7 +29,7 @@ class List
   end
 
   def null?
-    array.empty? ? Atom::TRUE : Atom::FALSE
+    Atom.from_boolean(array.empty?)
   end
 
   def atom?
