@@ -46,6 +46,7 @@ class Evaluator
     atom?: Primitive.new(:atom?),
     eq?: Primitive.new(:eq?),
     zero?: Primitive.new(:zero?),
+    number?: Primitive.new(:number?),
     add1: Primitive.new(:add1),
     sub1: Primitive.new(:sub1)
   }
