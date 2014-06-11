@@ -40,15 +40,14 @@ module SyntaxMatchers
   matcher :be_a_number do
     match do |string|
       s_expression = parse_s_expression(string)
-      s_expression.number?
+      s_expression.number? == Atom::TRUE
     end
   end
 
   matcher :be_a_tup do
     match do |string|
-      s_expressions = parse_program(string).s_expressions
-      s_expressions.length == 1 && s_expressions.first.list? &&
-        s_expressions.first.s_expressions.all? { |s_expression| s_expression.atom? && s_expression.number? }
+      s_expression = parse_s_expression(string)
+      s_expression.array.all? { |s_expression| s_expression.is_a?(Atom) && s_expression.number? == Atom::TRUE }
     end
   end
 end

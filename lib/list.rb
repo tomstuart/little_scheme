@@ -7,7 +7,7 @@ class List
 
   def evaluate(env)
     operation, *arguments = array
-    env[operation.symbol].apply(env, arguments)
+    operation.evaluate(env).apply(env, arguments)
   end
 
   def car
@@ -29,7 +29,7 @@ class List
   end
 
   def null?
-    array.empty? ? Atom::TRUE : Atom::FALSE
+    Atom.from_boolean(array.empty?)
   end
 
   def atom?
