@@ -1,11 +1,21 @@
 class Evaluator
+  def self.to_scheme_value(value)
+    if value == true
+      Atom::TRUE
+    elsif value == false
+      Atom::FALSE
+    else
+      value
+    end
+  end
+
   class Keyword
     def initialize(&block)
       @block = block
     end
 
     def apply(env, arguments)
-      @block.call(env, arguments)
+      Evaluator.to_scheme_value(@block.call(env, arguments))
     end
   end
 
@@ -16,7 +26,7 @@ class Evaluator
 
     def apply(env, arguments)
       first_argument, *other_arguments = arguments.map { |a| a.evaluate(env) }
-      first_argument.send(@operation, *other_arguments)
+      Evaluator.to_scheme_value(first_argument.send(@operation, *other_arguments))
     end
   end
 
