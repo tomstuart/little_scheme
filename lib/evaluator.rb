@@ -20,6 +20,12 @@ class Evaluator
     end
   end
 
+  class Predicate < Primitive
+    def apply(env, arguments)
+      Atom.from_boolean(super)
+    end
+  end
+
   KEYWORDS = {
     lambda: Keyword.new { |env, arguments|
       parameters = arguments.first.array
@@ -45,11 +51,11 @@ class Evaluator
     car: Primitive.new(:car),
     cdr: Primitive.new(:cdr),
     cons: Primitive.new(:cons),
-    null?: Primitive.new(:null?),
-    atom?: Primitive.new(:atom?),
-    eq?: Primitive.new(:eq?),
-    zero?: Primitive.new(:zero?),
-    number?: Primitive.new(:number?),
+    null?: Predicate.new(:null?),
+    atom?: Predicate.new(:atom?),
+    eq?: Predicate.new(:eq?),
+    zero?: Predicate.new(:zero?),
+    number?: Predicate.new(:number?),
     add1: Primitive.new(:add1),
     sub1: Primitive.new(:sub1)
   }
