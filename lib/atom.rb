@@ -15,7 +15,7 @@ class Atom
   def evaluate(env)
     if self == TRUE || self == FALSE
       self
-    elsif number? == TRUE
+    elsif number?
       self
     else
       env.fetch(symbol)
@@ -23,17 +23,17 @@ class Atom
   end
 
   def atom?
-    TRUE
+    true
   end
 
   def number?
-    Atom.from_boolean(symbol =~ /^\d+$/)
+    !!(symbol =~ /^\d+$/)
   end
 
   def eq?(other)
-    raise if [self, other].any? { |atom| atom.number? == TRUE }
+    raise if [self, other].any? &:number?
 
-    Atom.from_boolean(self == other)
+    self == other
   end
 
   def cons(list)
@@ -54,12 +54,12 @@ class Atom
 
   def sub1
     Atom.new((integer - 1).to_s).tap do |result|
-      raise unless result.number? == TRUE
+      raise unless result.number?
     end
   end
 
   def zero?
-    Atom.from_boolean(integer.zero?)
+    integer.zero?
   end
 
   private
