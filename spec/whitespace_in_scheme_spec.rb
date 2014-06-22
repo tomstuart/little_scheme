@@ -25,5 +25,25 @@ describe 'a little Scheme' do
       it { is_expected.to be_a_list }
       it { is_expected.to contain_the_s_expressions 'a', 'b', 'c' }
     end
+
+    describe '
+(
+  (
+    (how)
+    are
+  )
+  (
+    (you)
+    (
+      doing
+      so
+    )
+  )
+  far
+)
+             ' do
+      it { is_expected.to be_a_list }
+      it { is_expected.to contain_the_s_expressions '((how) are)', '((you) (doing so))', 'far' }
+    end
   end
 end
