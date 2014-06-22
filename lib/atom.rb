@@ -27,7 +27,7 @@ class Atom
   end
 
   def number?
-    Atom.from_boolean(symbol =~ /^\d+$/)
+    !!(symbol =~ /^\d+$/)
   end
 
   def eq?(other)

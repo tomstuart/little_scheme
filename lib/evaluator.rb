@@ -22,7 +22,9 @@ class Evaluator
 
   class Predicate < Primitive
     def apply(env, arguments)
-      Atom.from_boolean(super)
+      value = super
+      raise "Predicate #{@operation} called, but received non boolean value '#{value.inspect}'" unless [TrueClass, FalseClass].include? value.class
+      Atom.from_boolean(value)
     end
   end
 
