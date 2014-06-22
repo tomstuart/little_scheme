@@ -29,11 +29,11 @@ class List
   end
 
   def null?
-    Atom.from_boolean(array.empty?)
+    array.empty?
   end
 
   def atom?
-    Atom::FALSE
+    false
   end
 
   def ==(other)
