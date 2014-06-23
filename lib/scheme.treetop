@@ -4,7 +4,7 @@ grammar Scheme
   end
 
   rule list
-    '(' sexps:(sexp ' '?)* ')' {
+    space '(' sexps:(sexp space)* ')' space {
       def to_ast
         list_contents = sexps.elements.map{|element| element.sexp.to_ast }
         List.new(*list_contents)
@@ -13,10 +13,14 @@ grammar Scheme
   end
 
   rule atom
-    [^\s()]+ {
+    space [^\s()]+ space {
       def to_ast
-        Atom.new(text_value.to_sym)
+        Atom.new(text_value.strip.to_sym)
       end
     }
+  end
+
+  rule space
+    [\s]*
   end
 end
