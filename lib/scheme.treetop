@@ -23,4 +23,12 @@ grammar Scheme
   rule space
     [\s]*
   end
+
+  rule program
+    (sexp space)* {
+      def to_asts
+        elements.map{ |element| element.sexp.to_ast }
+      end
+    }
+  end
 end

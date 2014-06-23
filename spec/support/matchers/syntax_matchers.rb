@@ -57,12 +57,12 @@ module SyntaxMatchers
         true
       elsif s_expressions.length >= 3
         first, op, *rest = s_expressions
-        arithmetic_expression?([first]) && arithmetic_expression?(rest) && op.atom? && %w(+ * expt).include?(op.name)
+        arithmetic_expression?([first]) && arithmetic_expression?(rest) && op.atom? && %i(+ * expt).include?(op.symbol)
       end
     end
 
     match do |string|
-      s_expressions = parse_program(string).s_expressions
+      s_expressions = parse_program(string)
       arithmetic_expression?(s_expressions)
     end
   end
