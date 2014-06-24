@@ -137,4 +137,12 @@ module SemanticsMatchers
       evaluate(lat).array.include?(evaluate(atom))
     end
   end
+
+  matcher :evaluate_to_an_atom do |actual|
+    include EvaluatingMatcher
+
+    match do |actual|
+      evaluate(actual).atom?
+    end
+  end
 end
