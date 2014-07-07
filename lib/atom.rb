@@ -44,8 +44,13 @@ class Atom
     list.prepend(self)
   end
 
-  def ==(other)
+  def eql?(other)
     other.is_a?(Atom) && self.symbol == other.symbol
+  end
+  alias_method :==, :eql?
+
+  def hash
+    symbol.hash
   end
 
   def inspect
