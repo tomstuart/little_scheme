@@ -152,8 +152,8 @@ module SemanticsMatchers
     match do |actual|
       s_expression = evaluate(actual)
       s_expression.list? &&
-        s_expression.s_expressions.all? { |element| element.list? && element.s_expressions.length == 2 } &&
-        s_expression.s_expressions.length == s_expression.s_expressions.uniq.length
+        s_expression.array.all? { |element| element.list? && element.array.length == 2 } &&
+        s_expression.array.length == s_expression.array.uniq.length
     end
   end
 
@@ -163,7 +163,7 @@ module SemanticsMatchers
     match do |actual|
       s_expression = evaluate(actual)
       evaluate_to_a_rel.where(environment).matches?(actual) &&
-        s_expression.s_expressions.length == s_expression.s_expressions.map { |element| element.s_expressions.first }.uniq.length
+        s_expression.array.length == s_expression.array.map { |element| element.array.first }.uniq.length
     end
   end
 
@@ -173,7 +173,7 @@ module SemanticsMatchers
     match do |actual|
       s_expression = evaluate(actual)
       evaluate_to_a_fun.where(environment).matches?(actual) &&
-        s_expression.s_expressions.length == s_expression.s_expressions.map { |element| element.s_expressions[1] }.uniq.length
+        s_expression.array.length == s_expression.array.map { |element| element.array[1] }.uniq.length
     end
   end
 end
