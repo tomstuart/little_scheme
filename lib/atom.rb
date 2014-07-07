@@ -26,6 +26,10 @@ class Atom
     true
   end
 
+  def list?
+    false
+  end
+
   def number?
     !!(symbol =~ /^\d+$/)
   end
