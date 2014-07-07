@@ -36,7 +36,9 @@ class List
     false
   end
 
-  def ==(other)
+  def list?
+    true
+  end
     other.is_a?(List) && self.array == other.array
   end
 
