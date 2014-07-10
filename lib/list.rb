@@ -36,9 +36,19 @@ class List
     false
   end
 
-  def ==(other)
+  def list?
+    true
+  end
+
+  def eql?(other)
     other.is_a?(List) && self.array == other.array
   end
+  alias_method :==, :eql?
+
+  def hash
+    array.hash
+  end
+
 
   def inspect
     "(#{@array.map(&:inspect).join(' ')})"

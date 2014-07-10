@@ -66,4 +66,20 @@ module SyntaxMatchers
       arithmetic_expression?(s_expressions)
     end
   end
+
+  matcher :be_a_set do
+    match do |string|
+      s_expressions = parse_program(string)
+      s_expressions.length == 1 && s_expressions.first.list? &&
+        s_expressions.first.array.length == s_expressions.first.array.uniq.length
+    end
+  end
+
+  matcher :be_a_pair do
+    match do |string|
+      s_expressions = parse_program(string)
+      s_expressions.length == 1 && s_expressions.first.list? &&
+        s_expressions.first.array.length == 2
+    end
+  end
 end
